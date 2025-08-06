@@ -32,9 +32,6 @@ jobs:
           - arch: armv7
             goarch: arm
             goarm: "7"
-          - arch: armv6
-            goarch: arm
-            goarm: "6"
     
     steps:
     - name: Checkout astir-install repository
@@ -93,8 +90,6 @@ jobs:
             deb_arch: arm64
           - arch: armv7
             deb_arch: armhf
-          - arch: armv6
-            deb_arch: armel
     
     steps:
     - name: Checkout repository
@@ -209,9 +204,6 @@ jobs:
         if [ -f "astir-linux-armv7/astir-linux-armv7" ]; then
           mv astir-linux-armv7/astir-linux-armv7 release/
         fi
-        if [ -f "astir-linux-armv6/astir-linux-armv6" ]; then
-          mv astir-linux-armv6/astir-linux-armv6 release/
-        fi
         
         # Move packages (find them and avoid duplicates)
         find . -name "*.deb" -not -path "./release/*" -exec cp {} release/ \;
@@ -269,7 +261,6 @@ jobs:
         - **Linux AMD64** (Intel/AMD 64-bit) - \`astir-linux-amd64\`
         - **Linux ARM64** (64-bit ARM) - \`astir-linux-arm64\`
         - **Linux ARMv7** (32-bit ARM) - \`astir-linux-armv7\`
-        - **Linux ARMv6** (Raspberry Pi Zero) - \`astir-linux-armv6\`
         
         ## What's New
         
@@ -302,7 +293,6 @@ jobs:
           release/astir-linux-amd64
           release/astir-linux-arm64
           release/astir-linux-armv7
-          release/astir-linux-armv6
           release/*.deb
           release/checksums.txt
         draft: false
