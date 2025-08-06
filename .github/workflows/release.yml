@@ -18,6 +18,11 @@ on:
         type: string
         default: 'main'
 
+permissions:
+  contents: write    # Required to create releases and upload assets
+  actions: read      # Required to read workflow artifacts
+  packages: write    # Required for package operations
+
 jobs:
   build:
     name: Build Multi-Architecture Binaries
