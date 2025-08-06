@@ -32,8 +32,8 @@ sudo mv astir-linux-amd64 /usr/local/bin/astir
 ## Supported Platforms
 
 - **Linux x86_64** (Intel/AMD 64-bit)
-- **Linux ARM64** (64-bit ARM, Apple Silicon, AWS Graviton)
-- **Linux ARMv7** (32-bit ARM, Raspberry Pi 3/4)
+- **Linux ARM64** (64-bit ARM, Apple Silicon, AWS Graviton) - *Not tested yet*
+- **Linux ARMv7** (32-bit ARM, Raspberry Pi 3/4) - *Not tested yet*
 
 ## System Requirements
 
@@ -70,7 +70,7 @@ sudo usermod -aG docker $USER
 After installation, run:
 
 ```bash
-astir
+sudo astir
 ```
 
 The first-run setup wizard will guide you through:
@@ -91,10 +91,10 @@ The desktop environment image is approximately **4.5GB**. During the first setup
 
 ```bash
 # Check for updates
-astir update --check
+sudo astir update --check
 
 # Update to latest version
-astir update
+sudo astir update
 
 # Or re-run the installer
 curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/main/install.sh | sudo bash
@@ -161,9 +161,6 @@ docker info
 
 **Update issues:**
 ```bash
-# Check system status
-astir doctor
-
 # Force reinstall
 curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/main/install.sh | sudo bash
 ```

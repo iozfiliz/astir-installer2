@@ -144,7 +144,7 @@ jobs:
         if [ "$1" = "configure" ]; then
             # This runs as root, but we want user dirs to be created when user runs astir
             echo "Astir installed successfully!"
-            echo "Run 'astir' to get started."
+            echo "Run 'sudo astir' to get started (requires root privileges)."
         fi
         
         exit 0
