@@ -41,7 +41,7 @@ sudo mv astir-linux-amd64 /usr/local/bin/astir
 - **Docker** 20.10 or later
 - **Sudo access** (required for installation)
 - **Internet connection** (for downloading ~4.5GB desktop image)
-- **Solana Wallet** (existing wallet required for authentication)
+- **Solana Wallet** (new wallet required for authentication - see installation guide for wallet creation)
 
 ## Prerequisites
 
@@ -77,8 +77,17 @@ The first-run setup wizard will guide you through:
 
 1. **System Requirements Check** - Verify Docker and dependencies
 2. **Desktop Image Download** - Downloads the 4.5GB desktop environment (~5-10 minutes)
-3. **Wallet Import** - Connect your existing Solana wallet  
+3. **Wallet Import** - Connect your newly created Solana wallet (see installation guide for wallet creation)  
 4. **Connection Test** - Verify orchestrator connectivity
+
+## Viewing Status
+
+To check your connection status:
+1. Run `sudo astir` to open the interactive menu
+2. Navigate to **"View Status"** using W/S keys or arrow keys
+3. Press **Enter** to see detailed connection information
+
+> **💡 Navigation Tip**: If arrow keys don't work on your terminal, use **W** (up) and **S** (down) keys instead.
 
 ### Image Download Process
 
@@ -157,6 +166,9 @@ sudo usermod -aG docker $USER
 # Make sure Docker daemon is accessible
 docker --version
 docker info
+
+# Note: Astir requires sudo to run
+sudo astir --version
 ```
 
 **Update issues:**

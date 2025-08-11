@@ -206,8 +206,8 @@ show_next_steps() {
     echo "🎉 Astir is now installed!"
     echo
     echo "Next steps:"
-    echo "1. Run 'astir --help' to see available commands"
-    echo "2. Run 'astir' to start the interactive mode"
+    echo "1. Run 'sudo astir --help' to see available commands"
+    echo "2. Run 'sudo astir' to start the interactive mode"
     echo "3. Import your Solana wallet when prompted"
     echo
     echo "For help: https://github.com/$GITHUB_REPO"
