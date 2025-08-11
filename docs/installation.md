@@ -29,7 +29,7 @@ You can create this address using one of the following methods:
    - **🚨 CRITICAL**: Before signing out, make sure you have correctly written down your current wallet's 24-word secret phrase on paper (handwritten, legibly) to avoid losing access to your previous wallet
 
 2. **Create the new wallet:**
-   - Select **"Create a new wallet"** option in the Soarchain Mobile App
+   - Select **"Create Account"** option in the Soarchain Mobile App
    - **🚨 CRITICAL**: Write down the new wallet's 24-word secret phrase on paper (handwritten, legibly) to avoid losing access to this newly-created wallet
 
 ---
