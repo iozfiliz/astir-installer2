@@ -229,6 +229,8 @@ The setup wizard will guide you through:
 - ✅ Docker daemon status check
 - 🔄 Desktop image download (if needed)
 
+> **📥 Desktop Image Download Note**: The initial download progress from 0% to ~6% will appear slow as the base layers are larger compared to the remaining ones. After the first few layers complete, the progression speed will significantly increase. This is normal behavior - please be patient and allow sufficient time before considering a retry.
+
 ### Step 2: Wallet Import
 - Import your newly created Solana wallet (see Prerequisites section)
 - 24-word mnemonic phrase required (from the wallet you created in Prerequisites)
@@ -260,6 +262,34 @@ After setup, your configuration will be stored at:
   "setup_completed": true
 }
 ```
+
+## Viewing System Status
+
+To monitor your connection status and system information:
+
+1. **Start the CLI**: Run `sudo astir` to open the interactive menu
+2. **Navigate**: Use **W/S keys** or **arrow keys** to move between menu options
+3. **Select View Status**: Highlight "View Status" option 
+4. **Press Enter**: View the detailed status screen
+
+> **💡 Navigation Tip**: If arrow keys don't work in your terminal environment, use **W** (up) and **S** (down) keys instead. Both navigation methods are supported.
+
+The status screen displays:
+```
+=== System Status ===
+
+Connection Status: CONNECTED
+Session Duration: 6s
+Docker Status: CONNECTED
+gRPC Status: CONNECTED
+Wallet Status: CONNECTED
+Wallet Address: ******
+Wallet Connected At: 2025-08-08 10:16:16
+
+Max Containers: 10
+```
+
+The status screen automatically refreshes every 30 seconds and shows real-time connection information.
 
 ## Troubleshooting
 

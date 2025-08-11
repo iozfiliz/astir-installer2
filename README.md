@@ -80,6 +80,15 @@ The first-run setup wizard will guide you through:
 3. **Wallet Import** - Connect your newly created Solana wallet (see installation guide for wallet creation)  
 4. **Connection Test** - Verify orchestrator connectivity
 
+## Viewing Status
+
+To check your connection status:
+1. Run `sudo astir` to open the interactive menu
+2. Navigate to **"View Status"** using W/S keys or arrow keys
+3. Press **Enter** to see detailed connection information
+
+> **💡 Navigation Tip**: If arrow keys don't work on your terminal, use **W** (up) and **S** (down) keys instead.
+
 ### Image Download Process
 
 The desktop environment image is approximately **4.5GB**. During the first setup:
