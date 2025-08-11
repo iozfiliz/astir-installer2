@@ -10,6 +10,45 @@ For most users, the universal installer is the fastest way to get started:
 curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/main/install.sh | sudo bash
 ```
 
+## Prerequisites
+
+> **⚠️ IMPORTANT WARNING**: Astir Node is still in development phase!
+
+**We strongly recommend creating a completely new Solana address** that meets these specific requirements:
+- Generated from a 24-word mnemonic phrase
+- Uses the derivation path: m/44'/501'/0'/0'
+
+You can create this address using one of the following methods:
+
+---
+
+### Option 1: Soarchain Mobile App Method
+
+1. **If you already have a wallet in Soarchain Connect Mobile app:**
+   - Go to **Settings > Sign Out**
+   - **🚨 CRITICAL**: Before signing out, make sure you have correctly written down your current wallet's 24-word secret phrase on paper (handwritten, legibly) to avoid losing access to your previous wallet
+
+2. **Create the new wallet:**
+   - Select **"Create a new wallet"** option in the Soarchain Mobile App
+   - **🚨 CRITICAL**: Write down the new wallet's 24-word secret phrase on paper (handwritten, legibly) to avoid losing access to this newly-created wallet
+
+---
+
+### Option 2: Solana CLI Method
+
+1. **Install Solana CLI:**
+   - Follow the installation instructions at: https://solana.com/docs/intro/installation
+   - This tool is required to create a Solana address that complies with 24-word mnemonics and the specific HD path
+
+2. **Generate the new keypair and secure your wallet:**
+   ```bash
+   solana-keygen new --word-count 24 --derivation-path "m/44'/501'/0'/0'" --outfile ~/my-keypair.json
+   ```
+   > **🚨 CRITICAL**: Write down the 24-word phrase provided by the command
+   - Store it somewhere safe and secure
+
+---
+
 ## System Requirements
 
 ### Minimum Requirements
@@ -17,13 +56,13 @@ curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/mai
 - **Architecture**: x86_64, ARM64, or ARMv7
 - **RAM**: 512MB available
 - **Disk Space**: 100MB for client + 4.5GB for desktop image
-- **Sudo Access**: Required for installation and system setup
+- **Sudo Access**: Required for installation, system setup, and running Astir
 - **Network**: Internet connection for initial setup and updates
 
 ### Required Software
 - **Docker**: 20.10 or later (install from [docs.docker.com](https://docs.docker.com/engine/install/))
-- **Solana Wallet**: Existing wallet required for authentication
-- **Sudo Access**: Required for installation
+- **Solana Wallet**: New wallet created following the prerequisites above
+- **Sudo Access**: Required for installation and running Astir
 
 ### Supported Platforms
 
@@ -80,9 +119,9 @@ Astir Universal Installer
 🎉 Astir is now installed!
 
 Next steps:
-1. Run 'astir --help' to see available commands
-2. Run 'astir' to start the interactive mode
-3. Import your Solana wallet when prompted
+1. Run 'sudo astir --help' to see available commands
+2. Run 'sudo astir' to start the interactive mode
+3. Import your newly created Solana wallet when prompted
 ```
 
 ### 2. Debian/Ubuntu Package Installation
@@ -107,8 +146,11 @@ sudo dpkg -i astir_latest_armhf.deb
 #### Install Dependencies
 ```bash
 # If Docker is not installed
-sudo apt update
-sudo apt install docker.io
+# Install Docker following the official Docker documentation:
+# https://docs.docker.com/engine/install/
+
+# Or use Docker's official installer
+curl -fsSL https://get.docker.com | sudo sh
 
 # Start and enable Docker
 sudo systemctl start docker
@@ -156,7 +198,7 @@ chmod +x astir-linux-*
 # Install to system (choose your architecture)
 sudo mv astir-linux-amd64 /usr/local/bin/astir
 
-# Or install to user directory
+# Or install to user directory (Note: Astir requires sudo to run)
 mkdir -p ~/bin
 mv astir-linux-amd64 ~/bin/astir
 export PATH="$HOME/bin:$PATH"
@@ -169,7 +211,7 @@ mkdir -p ~/.config/astir/wallets
 
 #### Verify Installation
 ```bash
-astir --version
+sudo astir --version
 ```
 
 ## First Run Setup
@@ -177,7 +219,7 @@ astir --version
 After installation, run Astir for the first time:
 
 ```bash
-astir
+sudo astir
 ```
 
 The setup wizard will guide you through:
@@ -188,9 +230,10 @@ The setup wizard will guide you through:
 - 🔄 Desktop image download (if needed)
 
 ### Step 2: Wallet Import
-- Import your existing Solana wallet
-- 24-word mnemonic phrase required
+- Import your newly created Solana wallet (see Prerequisites section)
+- 24-word mnemonic phrase required (from the wallet you created in Prerequisites)
 - Wallet stored encrypted locally
+- **⚠️ Use only the new wallet created specifically for Astir**
 
 ### Step 3: Connection Test
 - Test connection to orchestrator
@@ -204,16 +247,13 @@ After setup, your configuration will be stored at:
 ```
 ~/.config/astir/
 ├── config.json          # Main configuration
-├── wallets/              # Encrypted wallet data
-├── certs/                # TLS certificates
-├── images/               # Cached desktop images
-└── logs/                 # Application logs
+└── wallets/              # Encrypted wallet data
 ```
 
 ### Configuration File
 ```json
 {
-  "orchestrator_address": "168.119.232.240:50051",
+  "orchestrator_address": "orchestrator2.teamsofagents.ai:50051",
   "max_containers": 10,
   "wallet_address": "your-wallet-address",
   "auto_update_enabled": true,
@@ -227,14 +267,10 @@ After setup, your configuration will be stored at:
 
 #### Docker not installed
 ```bash
-# Ubuntu/Debian
-sudo apt update
-sudo apt install docker.io
+# Install Docker following the official Docker documentation:
+# https://docs.docker.com/engine/install/
 
-# CentOS/RHEL
-sudo yum install docker
-
-# Or use Docker's official installer
+# Or use Docker's official installer (recommended)
 curl -fsSL https://get.docker.com | sudo sh
 ```
 
@@ -297,27 +333,6 @@ uname -m
 # armv6l → astir-linux-armv6
 ```
 
-### Network Issues
-
-#### Firewall blocking connections
-```bash
-# Check if port 50051 is accessible
-telnet production.astir.dev 50051
-
-# Or use netcat
-nc -zv production.astir.dev 50051
-```
-
-#### Proxy environments
-```bash
-# Set proxy environment variables if needed
-export http_proxy=http://proxy.company.com:8080
-export https_proxy=http://proxy.company.com:8080
-
-# Then run installer
-curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/main/install.sh | sudo bash
-```
-
 ## Updating
 
 ### Automatic Updates
@@ -326,21 +341,16 @@ Astir checks for updates automatically on startup. If updates are available, you
 ### Manual Update
 ```bash
 # Check for updates
-astir update --check
+sudo astir update --check
 
 # Update to latest version
-astir update
+sudo astir update
 
 # Or re-run installer (always safe)
 curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/main/install.sh | sudo bash
 ```
 
 ## Uninstallation
-
-### Using Uninstaller (Recommended)
-```bash
-curl -sSL https://raw.githubusercontent.com/Soar-Development/astir-installer/main/uninstall.sh | bash
-```
 
 ### Manual Removal
 ```bash
