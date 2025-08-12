@@ -2,6 +2,38 @@
 
 This guide covers all installation methods for the Astir Desktop Client on Linux systems.
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Prerequisites](#prerequisites)
+  - [Option 1: Soarchain Mobile App Method](#option-1-soarchain-mobile-app-method)
+  - [Option 2: Solana CLI Method](#option-2-solana-cli-method)
+- [System Requirements](#system-requirements)
+- [Installation Methods](#installation-methods)
+  - [1. Universal Installer (Recommended)](#1-universal-installer-recommended)
+  - [2. Debian/Ubuntu Package Installation](#2-debianubuntu-package-installation)
+  - [3. Manual Installation](#3-manual-installation)
+- [First Run Setup](#first-run-setup)
+  - [Step 1: System Requirements Check](#step-1-system-requirements-check)
+  - [Step 2: Wallet Import](#step-2-wallet-import)
+  - [Step 3: Connection Test](#step-3-connection-test)
+- [Running Astir in the Background with `screen` or `tmux`](#running-astir-in-the-background-with-screen-or-tmux)
+  - [Option 1: Using `screen`](#option-1-using-screen)
+  - [Option 2: Using `tmux`](#option-2-using-tmux)
+- [Configuration](#configuration)
+- [Viewing System Status](#viewing-system-status)
+- [Troubleshooting](#troubleshooting)
+  - [Docker Issues](#docker-issues)
+  - [Download Issues](#download-issues)
+  - [Architecture Detection Issues](#architecture-detection-issues)
+- [Updating](#updating)
+  - [Automatic Updates](#automatic-updates)
+  - [Manual Update](#manual-update)
+- [Uninstallation](#uninstallation)
+  - [Manual Removal](#manual-removal)
+- [Support](#support)
+- [Security](#security)
+
 ## Quick Start
 
 For most users, the universal installer is the fastest way to get started:
