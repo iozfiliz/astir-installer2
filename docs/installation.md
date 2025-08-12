@@ -21,7 +21,6 @@ This guide covers all installation methods for the Astir Desktop Client on Linux
   - [Option 1: Using `screen`](#option-1-using-screen)
   - [Option 2: Using `tmux`](#option-2-using-tmux)
 - [Configuration](#configuration)
-- [Configuration File](#configuration-file)
 - [Viewing System Status](#viewing-system-status)
 - [Troubleshooting](#troubleshooting)
   - [Docker Issues](#docker-issues)
