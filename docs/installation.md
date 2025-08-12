@@ -2,6 +2,38 @@
 
 This guide covers all installation methods for the Astir Desktop Client on Linux systems.
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Prerequisites](#prerequisites)
+  - [Option 1: Soarchain Mobile App Method](#option-1-soarchain-mobile-app-method)
+  - [Option 2: Solana CLI Method](#option-2-solana-cli-method)
+- [System Requirements](#system-requirements)
+- [Installation Methods](#installation-methods)
+  - [1. Universal Installer (Recommended)](#1-universal-installer-recommended)
+  - [2. Debian/Ubuntu Package Installation](#2-debianubuntu-package-installation)
+  - [3. Manual Installation](#3-manual-installation)
+- [First Run Setup](#first-run-setup)
+  - [Step 1: System Requirements Check](#step-1-system-requirements-check)
+  - [Step 2: Wallet Import](#step-2-wallet-import)
+  - [Step 3: Connection Test](#step-3-connection-test)
+- [Running Astir in the Background with `screen` or `tmux`](#running-astir-in-the-background-with-screen-or-tmux)
+  - [Option 1: Using `screen`](#option-1-using-screen)
+  - [Option 2: Using `tmux`](#option-2-using-tmux)
+- [Configuration](#configuration)
+- [Viewing System Status](#viewing-system-status)
+- [Troubleshooting](#troubleshooting)
+  - [Docker Issues](#docker-issues)
+  - [Download Issues](#download-issues)
+  - [Architecture Detection Issues](#architecture-detection-issues)
+- [Updating](#updating)
+  - [Automatic Updates](#automatic-updates)
+  - [Manual Update](#manual-update)
+- [Uninstallation](#uninstallation)
+  - [Manual Removal](#manual-removal)
+- [Support](#support)
+- [Security](#security)
+
 ## Quick Start
 
 For most users, the universal installer is the fastest way to get started:
@@ -63,6 +95,26 @@ You can create this address using one of the following methods:
 - **Docker**: 20.10 or later (install from [docs.docker.com](https://docs.docker.com/engine/install/))
 - **Solana Wallet**: New wallet created following the prerequisites above
 - **Sudo Access**: Required for installation and running Astir
+
+### Installing Docker
+#### Install Dependencies
+```bash
+# If Docker is not installed
+# Install Docker following the official Docker documentation:
+# https://docs.docker.com/engine/install/
+
+# Or use Docker's official installer
+curl -fsSL https://get.docker.com | sudo sh
+
+# Start and enable Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Add user to docker group
+sudo usermod -aG docker $USER
+# Log out and back in for group changes to take effect
+```
+
 
 ### Supported Platforms
 
@@ -144,22 +196,7 @@ sudo dpkg -i astir_latest_armhf.deb
 ```
 
 #### Install Dependencies
-```bash
-# If Docker is not installed
-# Install Docker following the official Docker documentation:
-# https://docs.docker.com/engine/install/
-
-# Or use Docker's official installer
-curl -fsSL https://get.docker.com | sudo sh
-
-# Start and enable Docker
-sudo systemctl start docker
-sudo systemctl enable docker
-
-# Add user to docker group
-sudo usermod -aG docker $USER
-# Log out and back in for group changes to take effect
-```
+If Docker is not installed, follow the steps in the **Prerequisites** section.
 
 #### Package Features
 - ✅ Automatic dependency management
@@ -242,6 +279,66 @@ The setup wizard will guide you through:
 - Verify wallet authentication
 - Confirm service availability
 
+
+## Running Astir in the Background with `screen` or `tmux`
+
+Astir needs to remain running for continuous operation. If you don’t want to keep a terminal window open, you can run it inside a persistent session using `screen` or `tmux`.
+
+### Option 1: Using `screen`
+1. **Install screen** (if not already installed):
+   ```bash
+   sudo apt install screen   # Debian/Ubuntu
+   sudo yum install screen   # CentOS/RHEL
+   ```
+2. **Create a named session**:
+   ```bash
+   screen -S astir
+   ```
+3. **Run Astir inside the session**:
+   ```bash
+   sudo astir
+   ```
+4. **Detach from the session** (leave Astir running in background):
+   - Press `Ctrl + A`, then `Ctrl + D`
+5. **Reattach later**:
+   ```bash
+   screen -r astir
+   ```
+6. **List running sessions**:
+   ```bash
+   screen -ls
+   ```
+
+---
+
+### Option 2: Using `tmux`
+1. **Install tmux** (if not already installed):
+   ```bash
+   sudo apt install tmux   # Debian/Ubuntu
+   sudo yum install tmux   # CentOS/RHEL
+   ```
+2. **Create a named session**:
+   ```bash
+   tmux new -s astir
+   ```
+3. **Run Astir inside the session**:
+   ```bash
+   sudo astir
+   ```
+4. **Detach from the session**:
+   - Press `Ctrl + B`, then `D`
+5. **Reattach later**:
+   ```bash
+   tmux attach -t astir
+   ```
+6. **List running sessions**:
+   ```bash
+   tmux ls
+   ```
+
+> **Tip:** This is useful for running Astir on remote servers or cloud instances where you want it to continue running after disconnecting from SSH.
+
+
 ## Configuration
 
 After setup, your configuration will be stored at:
@@ -252,7 +349,7 @@ After setup, your configuration will be stored at:
 └── wallets/              # Encrypted wallet data
 ```
 
-### Configuration File
+## Configuration File
 ```json
 {
   "orchestrator_address": "orchestrator2.teamsofagents.ai:50051",
