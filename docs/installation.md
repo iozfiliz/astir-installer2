@@ -182,17 +182,22 @@ For Debian-based distributions, you can install using .deb packages.
 
 #### Download and Install
 ```bash
+# Get latest version info
+LATEST_VERSION=$(curl -s https://api.github.com/repos/Soar-Development/astir-installer/releases/latest | grep -o '"tag_name": "[^"]*' | cut -d'"' -f4)
+# Remove 'v' prefix for package naming
+VERSION=${LATEST_VERSION#v}
+
 # AMD64 (Intel/AMD 64-bit)
-wget https://github.com/Soar-Development/astir-installer/releases/latest/download/astir_latest_amd64.deb
-sudo dpkg -i astir_latest_amd64.deb
+wget "https://github.com/Soar-Development/astir-installer/releases/download/${LATEST_VERSION}/astir_${VERSION}_amd64.deb"
+sudo dpkg -i "astir_${VERSION}_amd64.deb"
 
 # ARM64 (64-bit ARM)
-wget https://github.com/Soar-Development/astir-installer/releases/latest/download/astir_latest_arm64.deb
-sudo dpkg -i astir_latest_arm64.deb
+wget "https://github.com/Soar-Development/astir-installer/releases/download/${LATEST_VERSION}/astir_${VERSION}_arm64.deb"
+sudo dpkg -i "astir_${VERSION}_arm64.deb"
 
 # ARMv7 (32-bit ARM)
-wget https://github.com/Soar-Development/astir-installer/releases/latest/download/astir_latest_armhf.deb
-sudo dpkg -i astir_latest_armhf.deb
+wget "https://github.com/Soar-Development/astir-installer/releases/download/${LATEST_VERSION}/astir_${VERSION}_armhf.deb"
+sudo dpkg -i "astir_${VERSION}_armhf.deb"
 ```
 
 #### Install Dependencies
